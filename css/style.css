@@ -201,7 +201,7 @@ footer {
 /*Additional*/
 #search {
   background: #f4f4f4;
-  padding: 15px;
+  padding: 16px;
   border: 1px solid #ddd;
   margin-bottom: 20px;
   border-radius: 5px;
@@ -214,5 +214,5 @@ footer {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-  font-size: 16px;
+  font-size: 17px;
 }

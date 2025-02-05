@@ -13,7 +13,7 @@ body {
   max-width: 1200px;
   margin: auto;
   padding: 20px;
-  background-color: #fff;
+  background-color: #333;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
 }
@@ -52,7 +52,7 @@ nav a {
 }
 
 nav a:hover {
-  color: #ddd;
+  color: green;
 }
 
 /* Form Styles */

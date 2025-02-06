@@ -11,7 +11,7 @@ body {
 
 .container {
   width: 85%;
-  max-width: 1200px;
+  max-width: 1150px;
   margin: auto;
   padding: 30px;
   background-color: #fff;
@@ -38,6 +38,7 @@ header {
 header h1 {
   margin: 0;
   font-size: 3em;
+  font-style: normal;
   font-weight: 600;
   text-transform: uppercase;
 }
@@ -47,6 +48,7 @@ nav ul {
   list-style: none;
   text-align: center;
   margin-top: 25px;
+  margin-left: 2px;
 }
 
 nav ul li {
@@ -58,13 +60,13 @@ nav a {
   color: #fff;
   text-decoration: none;
   font-size: 1.2em;
-  font-weight: 500px;
+  font-weight: 700;
   letter-spacing: 1px;
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
 nav a:hover {
-  color: green;
+  color: rgb(97, 177, 97);
   transform: translateY(-3px);
 }
 
@@ -72,7 +74,7 @@ nav a:hover {
 form label {
   display: block;
   margin-bottom: 8px;
-  font-weight: bold;
+  font-weight:800;
   color: #555;
 }
 
@@ -99,7 +101,7 @@ form input[type="password"]:focus,
 form textarea:focus,
 form select:focus {
   outline: none;
-  border-color: #007bff;
+  border-color: #5a95d4;
   box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
   background-color: #fff;
 }
@@ -109,6 +111,7 @@ form button {
   color: white;
   padding: 15px 25px;
   border: none;
+  font-weight: 700;
   border-radius: 8px;
   cursor: pointer;
   font-size: 1.2em;
@@ -124,7 +127,7 @@ form button:hover {
 .alert {
   padding: 20px;
   margin-bottom: 25px;
-  border-radius: 8px;
+  border-radius: 10px;
   box-shadow: 0 3px 15px rgba(0,0,0,0.1);
 }
 
@@ -136,12 +139,13 @@ form button:hover {
 
 .alert-danger {
   color: #721c24;
-  background-color: #f8d7da;
+  background-color: #4b393b;
   border-color: #f5c6cb;
 }
 
 .error-message {
   color: red;
+  margin-left: 1px;
   font-size: 0.95em;
   margin-top: -5px;
   margin-bottom: 15px;
@@ -168,10 +172,12 @@ form button:hover {
 .job-listing p {
   margin-bottom: 12px;
   font-size: 1.1em;
+  font-weight: 500;
+  padding: 2px;
 }
 
 .job-listing a {
-  color: #007bff;
+  color: #10cdef;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease, text-decoration 0.3s ease;
@@ -179,7 +185,7 @@ form button:hover {
 
 .job-listing a:hover {
   text-decoration: underline;
-  color: #0056b3;
+  color: hsl(211, 100%, 35%);
 }
 
 /* Pagination */
@@ -194,6 +200,7 @@ form button:hover {
   text-decoration: none;
   border: 1px solid #ddd;
   color: #333;
+  margin-left: 1.5px;
   margin: 0 8px;
   border-radius: 8px;
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -217,8 +224,9 @@ footer {
   margin-top: 50px;
   background-color: #343a40;
   color: #fff;
-  border-top: 4px solid #007bff;
+  border-top: 4px solid #0a5f84;
   font-size: 1.2em;
+  font-weight: 600;
 }
 
 /*Additional*/
@@ -239,10 +247,11 @@ footer {
   border-radius: 6px;
   box-sizing: border-box;
   font-size: 16px;
+  font-weight: 300;
   transition: background-color 0.3s ease;
 }
 #search input[type="text"]:focus {
   background-color: #fff;
-  border-color: #007bff;
+  border-color: #151d25;
   box-shadow: 0 p 8px rgba(0,123,255,0.5);
 }

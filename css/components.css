@@ -4,7 +4,7 @@
   padding: 15px;
   margin-bottom: 20px;
   background-color: #fff;
-  border-radius: 8px;
+  border-radius: 10px;
   transition: box-shadow 0.3s ease;
 }
 
@@ -13,8 +13,8 @@
 }
 
 .job-card h3 {
-  color: #007bff;
-  margin-top: 0;
+  color: #2e2f31;
+  margin-top: 1px;
   font-size: 1.3em;
 }
 
@@ -24,12 +24,12 @@
 }
 
 .job-card a {
-  color: #007bff;
+  color: #7a7d80;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .job-card a:hover {
-  color: #0056b3;
+  color: aqua;
   text-decoration: underline;
 }

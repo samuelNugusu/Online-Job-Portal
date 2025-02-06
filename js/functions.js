@@ -1,15 +1,12 @@
-// Example: Function to show a modal (you'll need to add HTML for the modal)
 function showModal(title, content) {
     const modal = document.getElementById('myModal');
     const modalTitle = document.querySelector('#myModal .modal-title');
     const modalBody = document.querySelector('#myModal .modal-body');
 
     modalTitle.textContent = title;
-    modalBody.innerHTML = content; // Use innerHTML to allow HTML content
+    modalBody.innerHTML = content; 
 
     modal.style.display = 'block'; // Show the modal
-
-    // Add a close button event listener (you'll need a close button in the modal HTML)
     const closeButton = document.querySelector('#myModal .close');
     closeButton.addEventListener('click', function() {
         modal.style.display = 'none';
@@ -30,5 +27,3 @@ async function fetchData(url) {
         return null;
     }
 }
-
-//Other Helper Functions

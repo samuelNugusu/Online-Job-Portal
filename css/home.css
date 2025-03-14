@@ -1,95 +1,130 @@
-#searchjum{
-    background: #1abc9c;
-    color: #FFFFFF;
-}
-#insidenav{
-    background: aqua;
-    color: white;
-    font-size: 13px;
-}
-nav a{
-    font-size: 16px;
-    font-family: ubuntu;
-    color: white;
-}
-nav ul li {
-    font-size: 16px;
-    font-family: ubuntu;
-}
-li.active{
-    background: cadetblue;
-}
-#subcontent{
-    background: lavender;0
-color: black;
-    font-size: 13px;
-}
-footer .glyphicon {
-    font-size: 20px;
-    margin-bottom: 20px;
-    color: #f4511e;
-}
-div.bmsTop{
-    list-style-type: none;
-    display: block;
-    background:transparent;
-    padding: 10px 8px 8px;
-    margin-bottom: 10px;
-
-}
-div.bmsTop ul li{
-    display: inline;
-    overflow: hidden;
-}
-.panel {
-    border: 1px solid #f4511e;
-    border-radius:0;
-    transition: box-shadow 0.5s;
+body {
+  background: #f5f7fa;
 }
 
-.panel:hover {
-    box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+/* Hero/Search Section */
+.search-section {
+  position: relative;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+  background-attachment: fixed;
+  color: white;
+  overflow: hidden;
 }
 
-.panel-footer .btn:hover {
-    border: 1px solid #f4511e;
-    background-color: #fff !important;
-    color: #f4511e;
+.search-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(44, 62, 80, 0.7);
+  /* Dark overlay for readability */
+  z-index: 1;
 }
 
-.panel-heading {
-    color: #fff !important;
-    background-color: #f4511e !important;
-    padding: 25px;
-    border-bottom: 1px solid transparent;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
+.search-jumbotron {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  padding: 20px;
 }
 
-.panel-footer {
-    background-color: #fff !important;
+.search-jumbotron h1 {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  animation: fadeInDown 1s ease-in-out;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.panel-footer h3 {
+.search-jumbotron p {
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 30px;
+  animation: fadeIn 1s ease-in-out 0.3s forwards;
+  opacity: 0;
+}
+
+.search-form {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  animation: fadeInUp 1s ease-in-out 0.6s forwards;
+  opacity: 0;
+}
+
+.input-field {
+  max-width: 400px;
+}
+
+/* Secondary Call-to-Action */
+.cta-section {
+  text-align: center;
+  padding: 40px 20px;
+  background: #fff;
+}
+
+.cta-section p {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.cta-btn {
+  padding: 12px 30px;
+  background: #e74c3c;
+  color: white;
+  text-decoration: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.cta-btn:hover {
+  background: #c0392b;
+  transform: translateY(-2px);
+}
+
+/* Future Jobs Section */
+.future-jobs-section {
+  padding: 60px 20px;
+  background: #f5f7fa;
+}
+
+.future-jobs-section h2 {
+  text-align: center;
+  font-size: 32px;
+  color: #2c3e50;
+  margin-bottom: 40px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .search-section {
+    height: 50vh;
+  }
+
+  .search-jumbotron h1 {
     font-size: 32px;
-}
+  }
 
-.panel-footer h4 {
-    color: #aaa;
-    font-size: 14px;
-}
-
-.panel-footer .btn {
-    margin: 15px 0;
-    background-color: #f4511e;
-    color: #fff;
-}
-body{
-    background-image: url("../images/hero-background-lg.jpg");
-    font-family: Ubuntu ;
-    font-weight: normal;
+  .search-jumbotron p {
     font-size: 16px;
+  }
 
+  .search-form {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .input-field {
+    max-width: 100%;
+  }
 }

@@ -1,67 +1,13 @@
 <?php
-// Enable error reporting for debugging
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-// Handle autocomplete request
-if (isset($_GET['autocomplete']) && strlen($_GET['autocomplete']) === 1 && ctype_alpha($_GET['autocomplete'])) {
-    try {
-        require_once 'includes/db.php'; // Include db.php here for autocomplete
-        $letter = $_GET['autocomplete'];
-        $stmt = $pdo->prepare("SELECT title FROM jobs WHERE title LIKE ? ORDER BY posted_at DESC LIMIT 10");
-        $stmt->execute(["$letter%"]);
-        $suggestions = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        header('Content-Type: application/json');
-        echo json_encode($suggestions);
-        exit;
-    } catch (PDOException $e) {
-        header('Content-Type: application/json');
-        echo json_encode(['error' => $e->getMessage()]);
-        exit;
-    }
-}
-
-// Start session for main request
 session_start();
 require_once 'includes/db.php';
 
-// Debug: Check database connection
 try {
-    $pdo->query("SELECT 1");
-    echo "<!-- Database connection successful -->";
-} catch (PDOException $e) {
-    echo "<!-- Database connection failed: " . $e->getMessage() . " -->";
-}
-
-// Initialize variables
-$keyword = isset($_GET['keyword']) ? trim($_GET['keyword']) : '';
-$jobs = [];
-$limit = 1000; // Maximum number of jobs to display
-
-try {
-    // Debug: Log the query being executed
-    if ($keyword !== '') {
-        if (strlen($keyword) === 1 && ctype_alpha($keyword)) {
-            $query = "SELECT * FROM jobs WHERE title LIKE ? ORDER BY posted_at DESC LIMIT $limit";
-            $stmt = $pdo->prepare($query);
-            $stmt->execute(["$keyword%"]);
-            echo "<!-- Executing query: $query with keyword $keyword -->";
-        } else {
-            $query = "SELECT * FROM jobs WHERE title LIKE ? OR location LIKE ? ORDER BY posted_at DESC LIMIT $limit";
-            $stmt = $pdo->prepare($query);
-            $stmt->execute(["%$keyword%", "%$keyword%"]);
-            echo "<!-- Executing query: $query with keyword $keyword -->";
-        }
-    } else {
-        $query = "SELECT * FROM jobs ORDER BY posted_at DESC LIMIT $limit";
-        $stmt = $pdo->query($query);
-        echo "<!-- Executing query: $query -->";
-    }
+    $stmt = $pdo->prepare("SELECT * FROM jobs ORDER BY created_at DESC");
+    $stmt->execute();
     $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    echo "<!-- Found " . count($jobs) . " jobs -->";
 } catch (PDOException $e) {
-    echo "<p>Error: " . $e->getMessage() . "</p>";
+    $error = "Error: An error occurred while fetching jobs.";
 }
 ?>
 <!DOCTYPE HTML>
@@ -112,43 +58,29 @@ try {
     <section class="search-section">
         <div class="container">
             <h2>Search Jobs</h2>
-            <form class="search-form" action="search.php" method="GET">
-                <div class="search-wrapper">
-                    <input type="text" class="input-field" placeholder="Enter a letter or keyword" name="keyword" id="search-input" value="<?php echo htmlspecialchars($keyword); ?>" autocomplete="off">
-                    <button type="submit" class="btn search-btn">Search</button>
-                    <div id="autocomplete-dropdown" class="autocomplete-dropdown"></div>
-                </div>
-            </form>
-        </div>
-    </section>
-
-    <section class="jobs-section">
-        <div class="container">
-            <div class="grid">
-                <?php if (empty($jobs)): ?>
-                    <p>No jobs available at the moment.</p>
-                <?php else: ?>
-                    <?php if ($keyword !== '' && empty($jobs)): ?>
-                        <p>No jobs found matching "<?php echo htmlspecialchars($keyword); ?>".</p>
-                    <?php endif; ?>
+            <p>Find your dream job below.</p>
+            <?php if (isset($error)): ?>
+                <p class="message error"><?php echo htmlspecialchars($error); ?></p>
+            <?php endif; ?>
+            <?php if (empty($jobs)): ?>
+                <p class="message info">No jobs available at the moment.</p>
+            <?php else: ?>
+                <div class="job-list">
                     <?php foreach ($jobs as $job): ?>
-                        <div class="grid-item">
-                            <div class="card">
-                                <h3><?php echo htmlspecialchars($job['title']); ?></h3>
-                                <p><?php echo htmlspecialchars($job['description']); ?></p>
-                                <p><strong>Location:</strong> <?php echo htmlspecialchars($job['location']); ?></p>
-                                <p><strong>Posted:</strong> <?php echo date('F j, Y', strtotime($job['posted_at'])); ?></p>
-                                <?php if (isset($_SESSION['seeker_id'])): ?>
-                                    <a href="apply.php?job_id=<?php echo $job['id']; ?>"><button class="btn">Apply Now</button></a>
-                                <?php endif; ?>
-                            </div>
+                        <div class="job-item">
+                            <h3><?php echo htmlspecialchars($job['title']); ?></h3>
+                            <p><strong>Location:</strong> <?php echo htmlspecialchars($job['location']); ?></p>
+                            <p><?php echo htmlspecialchars(substr($job['description'], 0, 100)) . (strlen($job['description']) > 100 ? '...' : ''); ?></p>
+                            <p><small>Posted on: <?php echo htmlspecialchars($job['created_at']); ?></small></p>
+                            <?php if (isset($_SESSION['seeker_id'])): ?>
+                                <a href="apply.php?job_id=<?php echo $job['id']; ?>" class="btn apply-btn">Apply</a>
+                            <?php else: ?>
+                                <p><small><a href="login.php">Login as a Job Seeker</a> to apply.</small></p>
+                            <?php endif; ?>
                         </div>
                     <?php endforeach; ?>
-                    <?php if (count($jobs) >= $limit): ?>
-                        <p>Showing up to <?php echo $limit; ?> jobs. More may be available.</p>
-                    <?php endif; ?>
-                <?php endif; ?>
-            </div>
+                </div>
+            <?php endif; ?>
         </div>
     </section>
 
@@ -160,43 +92,16 @@ try {
     <script src="js/scripts.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const searchInput = document.getElementById('search-input');
-            const autocompleteDropdown = document.getElementById('autocomplete-dropdown');
+            const navToggle = document.querySelector('.nav-toggle');
+            const navLinks = document.querySelectorAll('.nav-links');
 
-            searchInput.addEventListener('input', function() {
-                const keyword = this.value.trim();
-                if (keyword.length === 1 && /[a-zA-Z]/.test(keyword)) {
-                    fetch(`search.php?autocomplete=${keyword}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            autocompleteDropdown.innerHTML = '';
-                            if (data.length > 0) {
-                                data.forEach(job => {
-                                    const div = document.createElement('div');
-                                    div.className = 'autocomplete-item';
-                                    div.textContent = job.title;
-                                    div.addEventListener('click', function() {
-                                        searchInput.value = job.title;
-                                        autocompleteDropdown.style.display = 'none';
-                                        searchInput.form.submit();
-                                    });
-                                    autocompleteDropdown.appendChild(div);
-                                });
-                                autocompleteDropdown.style.display = 'block';
-                            } else {
-                                autocompleteDropdown.style.display = 'none';
-                            }
-                        })
-                        .catch(error => console.error('Error fetching autocomplete data:', error));
-                } else {
-                    autocompleteDropdown.style.display = 'none';
-                }
+            navToggle.addEventListener('click', function() {
+                navLinks.forEach(links => links.classList.toggle('active'));
             });
 
-            document.addEventListener('click', function(e) {
-                if (!searchInput.contains(e.target) && !autocompleteDropdown.contains(e.target)) {
-                    autocompleteDropdown.style.display = 'none';
-                }
+            document.querySelector('.footer a').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         });
     </script>

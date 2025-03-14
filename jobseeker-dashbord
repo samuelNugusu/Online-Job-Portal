@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'includes/db.php';
+require_once 'includes/db.php';
 
 if (!isset($_SESSION['seeker_id'])) {
     header("Location: login.php");
@@ -8,17 +8,31 @@ if (!isset($_SESSION['seeker_id'])) {
 }
 
 $seeker_id = $_SESSION['seeker_id'];
-$stmt = $pdo->prepare("SELECT a.*, j.title, j.location FROM applications a JOIN jobs j ON a.job_id = j.id WHERE a.seeker_id = ? ORDER BY a.applied_at DESC");
-$stmt->execute([$seeker_hid]);
-$applications = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+try {
+    // Fetch applications with job details
+    $stmt = $pdo->prepare("
+        SELECT j.id, j.title, j.description, j.location, j.created_at, a.application_date
+        FROM applications a
+        JOIN jobs j ON a.job_id = j.id
+        WHERE a.job_seeker_id = ?
+        ORDER BY a.application_date DESC
+    ");
+    $stmt->execute([$seeker_id]);
+    $applications = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    $error = "Error: An error occurred while fetching your applications.";
+}
 ?>
 <!DOCTYPE HTML>
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Job Seeker Dashboard - Job Portal</title>
-    <link href="css/styles.css" rel="stylesheet">
+    <title>My Applications - Job Portal</title>
+    <link href="css/common.css" rel="stylesheet">
+    <link href="css/jobseeker-dashboard.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar" id="insidenav">
@@ -37,20 +51,24 @@ $applications = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </nav>
 
-    <section class="jobs-section">
+    <section class="dashboard-section">
         <div class="container">
             <h2>My Applications</h2>
+            <p>View the jobs you’ve applied for.</p>
+            <?php if (isset($error)): ?>
+                <p class="message error"><?php echo htmlspecialchars($error); ?></p>
+            <?php endif; ?>
             <?php if (empty($applications)): ?>
-                <p>You haven’t applied to any jobs yet. <a href="search.php">Find jobs now</a>.</p>
+                <p class="message info">You have not applied to any jobs yet. <a href="search.php">Find jobs to apply for</a>.</p>
             <?php else: ?>
-                <div class="grid">
+                <div class="application-list">
                     <?php foreach ($applications as $app): ?>
-                        <div class="grid-item">
-                            <div class="card">
-                                <h3><?php echo htmlspecialchars($app['title']); ?></h3>
-                                <p><strong>Location:</strong> <?php echo htmlspecialchars($app['location']); ?></p>
-                                <p><strong>Applied:</strong> <?php echo date('F j, Y', strtotime($app['applied_at'])); ?></p>
-                            </div>
+                        <div class="application-item">
+                            <h3><?php echo htmlspecialchars($app['title']); ?></h3>
+                            <p><strong>Location:</strong> <?php echo htmlspecialchars($app['location']); ?></p>
+                            <p><?php echo htmlspecialchars(substr($app['description'], 0, 100)) . (strlen($app['description']) > 100 ? '...' : ''); ?></p>
+                            <p><small>Applied on: <?php echo htmlspecialchars($app['application_date']); ?></small></p>
+                            <p><small>Posted on: <?php echo htmlspecialchars($app['created_at']); ?></small></p>
                         </div>
                     <?php endforeach; ?>
                 </div>
@@ -64,5 +82,20 @@ $applications = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </footer>
 
     <script src="js/scripts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navLinks = document.querySelectorAll('.nav-links');
+
+            navToggle.addEventListener('click', function() {
+                navLinks.forEach(links => links.classList.toggle('active'));
+            });
+
+            document.querySelector('.footer a').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
 </body>
 </html>

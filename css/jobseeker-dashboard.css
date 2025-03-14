@@ -1,13 +1,16 @@
-/* Specific styles for search.php */
+/* Specific styles for jobseeker-dashboard.php */
 body {
   background: linear-gradient(45deg, #0f0c29, #302b63, #24243e);
+  /* Cosmic gradient */
   overflow-x: hidden;
   min-height: 100vh;
 }
 
-.search-section {
+/* Dashboard Section */
+.dashboard-section {
   padding: 80px 20px;
-  background: radial-gradient(circle at center, #1e90ff 0%, #ff00ff 50%, #4b0082 100%);
+  background: radial-gradient(circle at top left, #00ff99 0%, #ff00ff 50%, #4b0082 100%);
+  /* Neon radial gradient */
   position: relative;
   overflow: hidden;
   min-height: 100vh;
@@ -17,7 +20,7 @@ body {
   animation: pulseBackground 10s infinite ease-in-out;
 }
 
-.search-section::before {
+.dashboard-section::before {
   content: '';
   position: absolute;
   top: 0;
@@ -39,22 +42,23 @@ body {
   padding: 40px;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(30, 144, 255, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 255, 153, 0.5);
   backdrop-filter: blur(5px);
   animation: cardPop 1s ease-out backwards;
 }
 
-.search-section h2 {
+.dashboard-section h2 {
   font-size: 3rem;
-  color: #1e90ff;
+  color: #00ff99;
+  /* Neon green */
   text-transform: uppercase;
   letter-spacing: 3px;
-  text-shadow: 0 0 10px #1e90ff, 0 0 20px #ff00ff, 0 0 30px #4b0082;
+  text-shadow: 0 0 10px #00ff99, 0 0 20px #ff00ff, 0 0 30px #4b0082;
   margin-bottom: 15px;
   animation: neonGlow 2s infinite alternate;
 }
 
-.search-section p {
+.dashboard-section p {
   font-size: 1.2rem;
   color: #e0e0e0;
   text-shadow: 0 0 5px #fff;
@@ -79,6 +83,18 @@ body {
   box-shadow: 0 0 15px #3498db;
 }
 
+.message.info a {
+  color: #00ff99;
+  text-decoration: none;
+  text-shadow: 0 0 5px #00ff99;
+  transition: color 0.3s;
+}
+
+.message.info a:hover {
+  color: #ff00ff;
+  text-shadow: 0 0 10px #ff00ff;
+}
+
 .message.error {
   background: rgba(231, 76, 60, 0.2);
   color: #e74c3c;
@@ -86,73 +102,43 @@ body {
   box-shadow: 0 0 15px #e74c3c;
 }
 
-.job-list {
+.application-list {
   display: grid;
   gap: 20px;
 }
 
-.job-item {
+.application-item {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
   padding: 20px;
   border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 10px rgba(30, 144, 255, 0.3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 255, 153, 0.3);
   transform-style: preserve-3d;
   transition: transform 0.6s ease, box-shadow 0.6s ease;
   animation: cardPop 1s ease-out backwards;
 }
 
-.job-item:hover {
+.application-item:hover {
   transform: translateY(-5px) rotateY(5deg) scale(1.02);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(30, 144, 255, 0.5);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 255, 153, 0.5);
 }
 
-.job-item h3 {
+.application-item h3 {
   font-size: 1.5rem;
-  color: #1e90ff;
-  text-shadow: 0 0 5px #1e90ff;
+  color: #00ff99;
+  text-shadow: 0 0 5px #00ff99;
   margin-bottom: 10px;
 }
 
-.job-item p {
+.application-item p {
   font-size: 1rem;
   color: #e0e0e0;
   text-shadow: 0 0 2px #fff;
   margin: 5px 0;
 }
 
-.job-item small {
+.application-item small {
   font-size: 0.9rem;
   color: #b3b3b3;
-}
-
-.job-item small a {
-  color: #1e90ff;
-  text-decoration: none;
-  text-shadow: 0 0 5px #1e90ff;
-}
-
-.job-item small a:hover {
-  color: #ff00ff;
-  text-shadow: 0 0 10px #ff00ff;
-}
-
-.apply-btn {
-  padding: 8px 15px;
-  background: linear-gradient(90deg, #1e90ff, #ff00ff);
-  color: #fff;
-  border: none;
-  border-radius: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-shadow: 0 0 3px #fff;
-  display: inline-block;
-  text-decoration: none;
-}
-
-.apply-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 10px #1e90ff;
 }
 
 /* Animations */
@@ -182,11 +168,11 @@ body {
 
 @keyframes neonGlow {
   0% {
-    text-shadow: 0 0 10px #1e90ff, 0 0 20px #ff00ff, 0 0 30px #4b0082;
+    text-shadow: 0 0 10px #00ff99, 0 0 20px #ff00ff, 0 0 30px #4b0082;
   }
 
   100% {
-    text-shadow: 0 0 20px #1e90ff, 0 0 40px #ff00ff, 0 0 50px #4b0082;
+    text-shadow: 0 0 20px #00ff99, 0 0 40px #ff00ff, 0 0 50px #4b0082;
   }
 }
 
@@ -232,15 +218,15 @@ body {
     padding: 20px;
   }
 
-  .search-section h2 {
+  .dashboard-section h2 {
     font-size: 2.5rem;
   }
 
-  .search-section p {
+  .dashboard-section p {
     font-size: 1rem;
   }
 
-  .job-item {
+  .application-item {
     padding: 15px;
   }
 }

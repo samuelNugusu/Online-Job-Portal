@@ -1,0 +1,261 @@
+/* Specific styles for contact.php */
+body {
+  background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460);
+  /* Dark cosmic gradient */
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Contact Section */
+.contact-section {
+  padding: 80px 20px;
+  background: radial-gradient(circle at center, #ff6f61 0%, #de1b5c 50%, #4b0082 100%);
+  /* Vibrant radial gradient */
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulseBackground 12s infinite ease-in-out;
+}
+
+.contact-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://www.transparenttextures.com/patterns/noisy.png');
+  opacity: 0.15;
+  z-index: 1;
+  animation: textureShift 20s infinite linear;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.contact-section h2 {
+  font-size: 3.5rem;
+  color: #ff6f61;
+  /* Coral neon */
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-shadow: 0 0 10px #ff6f61, 0 0 20px #de1b5c, 0 0 30px #4b0082;
+  margin-bottom: 20px;
+  animation: neonGlow 2s infinite alternate;
+}
+
+.contact-section p {
+  font-size: 1.3rem;
+  color: #e0e0e0;
+  text-shadow: 0 0 5px #e0e0e0;
+  margin-bottom: 40px;
+  animation: fadeIn 1s ease-in-out 0.3s forwards;
+  opacity: 0;
+}
+
+.message {
+  padding: 15px 30px;
+  margin-bottom: 30px;
+  border-radius: 15px;
+  font-size: 1.2rem;
+  text-shadow: 0 0 5px #fff;
+  animation: slideIn 0.5s ease-in-out;
+}
+
+.message.success {
+  background: rgba(46, 204, 113, 0.2);
+  color: #2ecc71;
+  text-shadow: 0 0 5px #2ecc71;
+  box-shadow: 0 0 15px #2ecc71;
+}
+
+.message.error {
+  background: rgba(231, 76, 60, 0.2);
+  color: #e74c3c;
+  text-shadow: 0 0 5px #e74c3c;
+  box-shadow: 0 0 15px #e74c3c;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-top: 40px;
+  perspective: 1000px;
+}
+
+.grid-item {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 105, 97, 0.5);
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease, box-shadow 0.6s ease;
+  animation: cardPop 1s ease-out backwards;
+}
+
+.grid-item:hover {
+  transform: translateY(-10px) rotateY(5deg) scale(1.02);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 105, 97, 0.7);
+}
+
+.contact-info {
+  text-align: left;
+}
+
+.contact-info p {
+  font-size: 1.1rem;
+  color: #e0e0e0;
+  margin: 15px 0;
+  text-shadow: 0 0 2px #fff;
+}
+
+.contact-info p strong {
+  color: #ff6f61;
+  text-shadow: 0 0 5px #ff6f61;
+}
+
+.contact-info p a {
+  color: #de1b5c;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.contact-info p a:hover {
+  color: #ff6f61;
+  text-shadow: 0 0 5px #ff6f61;
+}
+
+/* Contact Form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  text-align: left;
+}
+
+.form-group label {
+  font-size: 1rem;
+  color: #ff6f61;
+  text-shadow: 0 0 5px #ff6f61;
+  margin-bottom: 8px;
+  font-weight: 600;
+  display: block;
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px 20px;
+  border: 2px solid rgba(255, 105, 97, 0.3);
+  border-radius: 10px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.input-field:focus {
+  border-color: #ff6f61;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 15px #ff6f61;
+}
+
+textarea.input-field {
+  resize: vertical;
+  min-height: 150px;
+}
+
+.btn {
+  padding: 12px 30px;
+  background: linear-gradient(90deg, #ff6f61, #de1b5c, #4b0082);
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  text-shadow: 0 0 5px #fff;
+}
+
+.btn:hover {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 0 20px #ff6f61, 0 0 30px #de1b5c;
+  background: linear-gradient(90deg, #cc5a4e, #b01549, #320058);
+}
+
+/* Animations */
+@keyframes pulseBackground {
+  0% {
+    background-position: 0% 0%;
+  }
+
+  50% {
+    background-position: 100% 100%;
+  }
+
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+@keyframes textureShift {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(100px);
+  }
+}
+
+@keyframes neonGlow {
+  0% {
+    text-shadow: 0 0 10px #ff6f61, 0 0 20px #de1b5c, 0 0 30px #4b0082;
+  }
+
+  100% {
+    text-shadow: 0 0 20px #ff6f61, 0 0 40px #de1b5c, 0 0 50px #4b0082;
+  }
+}
+
+@keyframes cardPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateZ(-100px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) translateZ(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-section h2 {
+    font-size: 2.5rem;
+  }
+
+  .contact-section p {
+    font-size: 1rem;
+  }
+
+  .grid-item {
+    padding: 20px;
+  }
+}

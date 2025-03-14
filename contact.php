@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="grid-item contact-info">
                     <p><strong>Address:</strong> Addis Ababa, Ethiopia</p>
                     <p><strong>Phone:</strong> +251 953 420 346</p>
-                    <p><strong>Email:</strong> <a href="mailto:EthioJobportal@gmail.com">EthioJobportal@gmail.com</a></p>
+                    <p><strong>Email:</strong> <a href="mailto:EthioJobportal@gmail.com">saminugus126@gmail.com</a></p>
                 </div>
                 <div class="grid-item contact-form">
                     <form class="contact-form" method="POST">

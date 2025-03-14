@@ -1,0 +1,68 @@
+<?php
+session_start();
+include 'includes/db.php';
+
+if (!isset($_SESSION['seeker_id'])) {
+    header("Location: login.php");
+    exit;
+}
+
+$seeker_id = $_SESSION['seeker_id'];
+$stmt = $pdo->prepare("SELECT a.*, j.title, j.location FROM applications a JOIN jobs j ON a.job_id = j.id WHERE a.seeker_id = ? ORDER BY a.applied_at DESC");
+$stmt->execute([$seeker_hid]);
+$applications = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Job Seeker Dashboard - Job Portal</title>
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar" id="insidenav">
+        <div class="nav-container">
+            <a href="index.php" class="nav-brand">Job Portal</a>
+            <button class="nav-toggle">☰</button>
+            <ul class="nav-links">
+                <li><a href="index.php#main">Home</a></li>
+                <li><a href="search.php">Search Jobs</a></li>
+                <li><a href="jobseeker-dashboard.php">My Applications</a></li>
+                <li><a href="contact.php#contact">Contact Us</a></li>
+            </ul>
+            <ul class="nav-links right">
+                <li><a href="logout.php">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="jobs-section">
+        <div class="container">
+            <h2>My Applications</h2>
+            <?php if (empty($applications)): ?>
+                <p>You haven’t applied to any jobs yet. <a href="search.php">Find jobs now</a>.</p>
+            <?php else: ?>
+                <div class="grid">
+                    <?php foreach ($applications as $app): ?>
+                        <div class="grid-item">
+                            <div class="card">
+                                <h3><?php echo htmlspecialchars($app['title']); ?></h3>
+                                <p><strong>Location:</strong> <?php echo htmlspecialchars($app['location']); ?></p>
+                                <p><strong>Applied:</strong> <?php echo date('F j, Y', strtotime($app['applied_at'])); ?></p>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <a href="#insidenav" title="To Top">↑</a>
+        <p>Job Portal © 2025</p>
+    </footer>
+
+    <script src="js/scripts.js"></script>
+</body>
+</html>

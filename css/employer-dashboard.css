@@ -1,0 +1,248 @@
+/* Specific styles for employer-dashboard.php */
+body {
+  background: linear-gradient(45deg, #0f0c29, #302b63, #24243e);
+  /* Cosmic gradient */
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Dashboard Section */
+.dashboard-section {
+  padding: 80px 20px;
+  background: radial-gradient(circle at bottom left, #00ffcc 0%, #ff00ff 50%, #4b0082 100%);
+  /* Neon radial gradient */
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulseBackground 10s infinite ease-in-out;
+}
+
+.dashboard-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://www.transparenttextures.com/patterns/noisy.png');
+  opacity: 0.1;
+  z-index: 1;
+  animation: textureShift 15s infinite linear;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 255, 204, 0.5);
+  backdrop-filter: blur(5px);
+  animation: cardPop 1s ease-out backwards;
+}
+
+.dashboard-section h2 {
+  font-size: 3rem;
+  color: #00ffcc;
+  /* Neon cyan */
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-shadow: 0 0 10px #00ffcc, 0 0 20px #ff00ff, 0 0 30px #4b0082;
+  margin-bottom: 15px;
+  animation: neonGlow 2s infinite alternate;
+}
+
+.dashboard-section p {
+  font-size: 1.2rem;
+  color: #e0e0e0;
+  text-shadow: 0 0 5px #fff;
+  margin-bottom: 30px;
+  animation: fadeIn 1s ease-in-out 0.3s forwards;
+  opacity: 0;
+}
+
+.message {
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  font-size: 1.1rem;
+  text-shadow: 0 0 5px #fff;
+  animation: slideIn 0.5s ease-in-out;
+}
+
+.message.info {
+  background: rgba(52, 152, 219, 0.2);
+  color: #3498db;
+  text-shadow: 0 0 5px #3498db;
+  box-shadow: 0 0 15px #3498db;
+}
+
+.message.error {
+  background: rgba(231, 76, 60, 0.2);
+  color: #e74c3c;
+  text-shadow: 0 0 5px #e74c3c;
+  box-shadow: 0 0 15px #e74c3c;
+}
+
+.job-list {
+  display: grid;
+  gap: 20px;
+}
+
+.job-item {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 255, 204, 0.3);
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease, box-shadow 0.6s ease;
+  animation: cardPop 1s ease-out backwards;
+}
+
+.job-item:hover {
+  transform: translateY(-5px) rotateY(5deg) scale(1.02);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 255, 204, 0.5);
+}
+
+.job-item h3 {
+  font-size: 1.5rem;
+  color: #00ffcc;
+  text-shadow: 0 0 5px #00ffcc;
+  margin-bottom: 10px;
+}
+
+.job-item p {
+  font-size: 1rem;
+  color: #e0e0e0;
+  text-shadow: 0 0 2px #fff;
+  margin: 5px 0;
+}
+
+.job-item small {
+  font-size: 0.9rem;
+  color: #b3b3b3;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 8px 15px;
+  margin: 5px;
+  background: linear-gradient(90deg, #00ffcc, #ff00ff);
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-shadow: 0 0 3px #fff;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px #00ffcc;
+}
+
+.delete-btn {
+  background: linear-gradient(90deg, #ff00ff, #e74c3c);
+}
+
+.delete-btn:hover {
+  box-shadow: 0 0 10px #e74c3c;
+}
+
+/* Animations */
+@keyframes pulseBackground {
+  0% {
+    background-position: 0% 0%;
+  }
+
+  50% {
+    background-position: 100% 100%;
+  }
+
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+@keyframes textureShift {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(100px);
+  }
+}
+
+@keyframes neonGlow {
+  0% {
+    text-shadow: 0 0 10px #00ffcc, 0 0 20px #ff00ff, 0 0 30px #4b0082;
+  }
+
+  100% {
+    text-shadow: 0 0 20px #00ffcc, 0 0 40px #ff00ff, 0 0 50px #4b0082;
+  }
+}
+
+@keyframes cardPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateZ(-100px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) translateZ(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
+  .dashboard-section h2 {
+    font-size: 2.5rem;
+  }
+
+  .dashboard-section p {
+    font-size: 1rem;
+  }
+
+  .job-item {
+    padding: 15px;
+  }
+}

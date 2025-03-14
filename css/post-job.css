@@ -1,0 +1,240 @@
+/* Specific styles for post-job.php */
+body {
+  background: linear-gradient(45deg, #0f0c29, #302b63, #24243e);
+  /* Cosmic gradient */
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Post Job Section */
+.post-job-section {
+  padding: 80px 20px;
+  background: radial-gradient(circle at top right, #ff4e50 0%, #ff6f61 50%, #4b0082 100%);
+  /* Neon radial gradient */
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulseBackground 10s infinite ease-in-out;
+}
+
+.post-job-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://www.transparenttextures.com/patterns/noisy.png');
+  opacity: 0.1;
+  z-index: 1;
+  animation: textureShift 15s infinite linear;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 78, 80, 0.5);
+  backdrop-filter: blur(5px);
+  animation: cardPop 1s ease-out backwards;
+}
+
+.post-job-section h2 {
+  font-size: 3rem;
+  color: #ff4e50;
+  /* Neon red */
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-shadow: 0 0 10px #ff4e50, 0 0 20px #ff6f61, 0 0 30px #4b0082;
+  margin-bottom: 15px;
+  animation: neonGlow 2s infinite alternate;
+}
+
+.post-job-section p {
+  font-size: 1.2rem;
+  color: #e0e0e0;
+  text-shadow: 0 0 5px #fff;
+  margin-bottom: 30px;
+  animation: fadeIn 1s ease-in-out 0.3s forwards;
+  opacity: 0;
+}
+
+.message {
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  font-size: 1.1rem;
+  text-shadow: 0 0 5px #fff;
+  animation: slideIn 0.5s ease-in-out;
+}
+
+.message.success {
+  background: rgba(46, 204, 113, 0.2);
+  color: #2ecc71;
+  text-shadow: 0 0 5px #2ecc71;
+  box-shadow: 0 0 15px #2ecc71;
+}
+
+.message.error {
+  background: rgba(231, 76, 60, 0.2);
+  color: #e74c3c;
+  text-shadow: 0 0 5px #e74c3c;
+  box-shadow: 0 0 15px #e74c3c;
+}
+
+.post-job-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  text-align: left;
+}
+
+.form-group label {
+  font-size: 1rem;
+  color: #ff4e50;
+  text-shadow: 0 0 5px #ff4e50;
+  margin-bottom: 8px;
+  font-weight: 600;
+  display: block;
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px 20px;
+  border: 2px solid rgba(255, 78, 80, 0.3);
+  border-radius: 10px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.input-field:focus {
+  border-color: #ff4e50;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 15px #ff4e50;
+}
+
+textarea.input-field {
+  resize: vertical;
+  min-height: 150px;
+}
+
+.btn {
+  padding: 12px 30px;
+  background: linear-gradient(90deg, #ff4e50, #ff6f61, #4b0082);
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  text-shadow: 0 0 5px #fff;
+}
+
+.btn:hover {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 0 20px #ff4e50, 0 0 30px #ff6f61;
+  background: linear-gradient(90deg, #cc3d3e, #cc5a4e, #320058);
+}
+
+/* Animations */
+@keyframes pulseBackground {
+  0% {
+    background-position: 0% 0%;
+  }
+
+  50% {
+    background-position: 100% 100%;
+  }
+
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+@keyframes textureShift {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(100px);
+  }
+}
+
+@keyframes neonGlow {
+  0% {
+    text-shadow: 0 0 10px #ff4e50, 0 0 20px #ff6f61, 0 0 30px #4b0082;
+  }
+
+  100% {
+    text-shadow: 0 0 20px #ff4e50, 0 0 40px #ff6f61, 0 0 50px #4b0082;
+  }
+}
+
+@keyframes cardPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateZ(-100px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) translateZ(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
+  .post-job-section h2 {
+    font-size: 2.5rem;
+  }
+
+  .post-job-section p {
+    font-size: 1rem;
+  }
+
+  .input-field {
+    padding: 10px 15px;
+  }
+}

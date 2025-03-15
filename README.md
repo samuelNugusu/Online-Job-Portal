@@ -1,5 +1,4 @@
 # 🏆 Online Job Portal
-
 Welcome to the **Online Job Portal** – a powerful platform designed to bridge the gap between **job seekers** and **employers**.
 Our goal is to make job hunting and recruitment **easy, efficient, and accessible** for everyone.
 
